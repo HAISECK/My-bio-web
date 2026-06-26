@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAISECK ✦</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #000000;
+    --card: #0d0d0d;
+    --card2: #141414;
+    --border: #1f1f1f;
+    --purple: #9b59f5;
+    --purple-dim: rgba(155,89,245,0.15);
+    --crimson: #e0294a;
+    --crimson-dim: rgba(224,41,74,0.12);
+    --white: #f0f0f0;
+    --muted: #666;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+  }
+
+  /* ── HERO VIDEO ── */
+  .hero-wrap {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 28px;
+    box-shadow: 0 0 40px rgba(155,89,245,0.25), 0 0 80px rgba(155,89,245,0.08);
+  }
+  .hero-wrap video {
+    width: 100%;
+    display: block;
+    border-radius: 16px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .header h1 {
+    font-family: var(--mono);
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #fff 30%, var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .header a {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--purple);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(155,89,245,0.3);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .header a:hover { color: #fff; border-color: #fff; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 16px;
+    animation: fadeUp 0.5s ease both;
+  }
+  .card + .card { animation-delay: 0.05s; }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── ABOUT ── */
+  .about-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: baseline;
+  }
+  .about-key {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 90px;
+    flex-shrink: 0;
+  }
+  .about-val { color: var(--white); font-size: 13px; }
+  .about-note {
+    font-size: 11px;
+    color: #444;
+    font-style: italic;
+    margin-top: -4px;
+    margin-bottom: 8px;
+    padding-left: 98px;
+  }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    color: #aaa;
+  }
+  .pronouns-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--crimson);
+    color: var(--crimson);
+    background: var(--crimson-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── SECTION GIF ── */
+  .section-gif {
+    width: 100%;
+    border-radius: 14px;
+    display: block;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 24px rgba(155,89,245,0.12);
+  }
+
+  /* ── KINN ── */
+  .kinn-list { list-style: none; }
+  .kinn-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #111;
+    font-size: 13px;
+  }
+  .kinn-list li:last-child { border-bottom: none; }
+  .kinn-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--purple);
+    min-width: 18px;
+    opacity: 0.7;
+  }
+
+  /* ── ANIME GRID ── */
+  .sub-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+  .anime-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+  .anime-item {
+    font-size: 12px;
+    padding: 6px 10px;
+    background: var(--card2);
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    color: #ccc;
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .anime-item:hover { border-color: var(--purple); color: #fff; }
+  .anime-item .n {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: #444;
+    flex-shrink: 0;
+  }
+  .media-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .media-pill {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: var(--card2);
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    color: #bbb;
+  }
+  .doza-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #333;
+    font-style: italic;
+    margin-top: 12px;
+  }
+
+  /* ── PHOTO ── */
+  .profile-photo {
+    width: 100%;
+    max-width: 280px;
+    display: block;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    box-shadow: 0 0 32px rgba(155,89,245,0.2);
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  /* ── PLAY TOGETHER ── */
+  .play-list { list-style: none; }
+  .play-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #111;
+  }
+  .play-row:last-child { border-bottom: none; }
+  .play-game {
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 160px;
+  }
+  .copyable {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--white);
+    cursor: pointer;
+    padding: 3px 10px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    position: relative;
+    user-select: none;
+  }
+  .copyable:hover {
+    border-color: var(--purple);
+    background: var(--purple-dim);
+    color: #d4b8ff;
+  }
+  .copyable:active { transform: scale(0.97); }
+
+  .play-cta {
+    text-align: center;
+    margin-top: 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--purple);
+    letter-spacing: 0.06em;
+    padding: 12px;
+    border: 1px dashed rgba(155,89,245,0.3);
+    border-radius: 10px;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1a1a1a;
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 999;
+    white-space: nowrap;
+    box-shadow: 0 0 20px rgba(155,89,245,0.3);
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 480px) {
+    .anime-grid { grid-template-columns: 1fr 1fr; }
+    .about-note { padding-left: 0; }
+    .play-game { min-width: 120px; font-size: 11px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .card { animation: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- VIDEO HERO -->
+  <div class="hero-wrap reveal">
+    <video autoplay loop muted playsinline>
+      <source src="bio/evangelion.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>HAISECK ✦</h1>
+    <a href="https://t.me/HAISECK" target="_blank" rel="noopener">@HAISECK</a>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="card reveal">
+    <div class="section-label">about me</div>
+
+    <div class="about-row">
+      <span class="about-key">call me</span>
+      <span class="about-val">HAISECK · Haise · хайсек · хайсе · Хаська · гамасек</span>
+    </div>
+    <p class="about-note">You can call it and distort it as you like, the main thing is that I understand</p>
+
+    <div class="about-row">
+      <span class="about-key">pronouns</span>
+      <span class="about-val"><span class="pronouns-badge">SHE / HER</span></span>
+    </div>
+
+    <div class="about-row">
+      <span class="about-key">birthday</span>
+      <span class="about-val">26.10.2009 ♏️ 🇺🇦</span>
+    </div>
+
+    <div class="about-row" style="margin-top:4px;">
+      <span class="about-key">languages</span>
+      <div class="tag-list">
+        <span class="tag">Ukrainian</span>
+        <span class="tag">Russian</span>
+        <span class="tag">English [base]</span>
+        <span class="tag">German [weak]</span>
+      </div>
+    </div>
+
+    <div class="about-row" style="margin-top:12px;">
+      <span class="about-key">music</span>
+      <span class="about-val">ponos deda remix</span>
+    </div>
+  </div>
+
+  <!-- TERROR GIF -->
+  <img src="bio/terror.gif" alt="Terror in Resonance" class="section-gif reveal">
+
+  <!-- KINN -->
+  <div class="card reveal">
+    <div class="section-label">my kinn</div>
+    <ul class="kinn-list">
+      <li><span class="kinn-num">01</span> 002 — Darling in the FranXX</li>
+      <li><span class="kinn-num">02</span> Twelve — Zankyou no Terror</li>
+      <li><span class="kinn-num">03</span> Alisa Mikhailovna Kudjo — Tonari no Alya-san</li>
+      <li><span class="kinn-num">04</span> Ayanami Rei — Neon Genesis Evangelion</li>
+      <li><span class="kinn-num">05</span> Asuka Langley — Neon Genesis Evangelion</li>
+      <li><span class="kinn-num">06</span> Yoruichi — Bleach</li>
+      <li><span class="kinn-num">07</span> Power — Chainsaw Man</li>
+    </ul>
+  </div>
+
+  <!-- KAWORU GIF -->
+  <img src="bio/kaworu.gif" alt="Kaworu" class="section-gif reveal">
+
+  <!-- WHAT I KNOW -->
+  <div class="card reveal">
+    <div class="section-label">what i know</div>
+    <p style="font-size:11px;color:#444;font-style:italic;margin-bottom:16px;">!!I know more I just forgot!!</p>
+
+    <div class="sub-label">Anime</div>
+    <div class="anime-grid">
+      <div class="anime-item"><span class="n">01</span>Darling in the FranXX</div>
+      <div class="anime-item"><span class="n">02</span>Angel Next Door Spoils Me</div>
+      <div class="anime-item"><span class="n">03</span>My Dress-Up Darling</div>
+      <div class="anime-item"><span class="n">04</span>Bunny Girl Senpai</div>
+      <div class="anime-item"><span class="n">05</span>Kamisama Hajimemashita</div>
+      <div class="anime-item"><span class="n">06</span>Tokyo Ghoul</div>
+      <div class="anime-item"><span class="n">07</span>Horimiya</div>
+      <div class="anime-item"><span class="n">08</span>I'm Not Experienced</div>
+      <div class="anime-item"><span class="n">09</span>Vermeil in Gold</div>
+      <div class="anime-item"><span class="n">10</span>From Dreamer to Realist</div>
+      <div class="anime-item"><span class="n">11</span>More Than Married Couple</div>
+      <div class="anime-item"><span class="n">12</span>Siren</div>
+      <div class="anime-item"><span class="n">13</span>Sword Art Online</div>
+      <div class="anime-item"><span class="n">14</span>A Silent Voice</div>
+      <div class="anime-item"><span class="n">15</span>One Room, Sunshine, Angel</div>
+      <div class="anime-item"><span class="n">16</span>Miss Nagatoro</div>
+      <div class="anime-item"><span class="n">17</span>Call of the Night</div>
+      <div class="anime-item"><span class="n">18</span>Caught Between Two Fires</div>
+      <div class="anime-item"><span class="n">19</span>My First Girlfriend is a Gal</div>
+      <div class="anime-item"><span class="n">20</span>Neon Genesis Evangelion</div>
+      <div class="anime-item"><span class="n">21</span>Mushoku Tensei</div>
+      <div class="anime-item"><span class="n">22</span>The Eminence in Shadow</div>
+      <div class="anime-item"><span class="n">23</span>Soul Eater</div>
+      <div class="anime-item"><span class="n">24</span>Blue Lock</div>
+      <div class="anime-item"><span class="n">25</span>A Lull in the Sea</div>
+      <div class="anime-item"><span class="n">26</span>Seraph of the End</div>
+      <div class="anime-item"><span class="n">27</span>The Detective Is Already Dead</div>
+      <div class="anime-item"><span class="n">28</span>Akashic Records</div>
+      <div class="anime-item"><span class="n">29</span>Death Note</div>
+      <div class="anime-item"><span class="n">30</span>Chainsaw Man</div>
+      <div class="anime-item"><span class="n">31</span>Re:Zero</div>
+      <div class="anime-item"><span class="n">32</span>Absolute Duo</div>
+      <div class="anime-item"><span class="n">33</span>High School DxD</div>
+      <div class="anime-item"><span class="n">34</span>Please Put Them On, Takamine-san</div>
+      <div class="anime-item"><span class="n">35</span>Tonikaku Kawaii</div>
+      <div class="anime-item"><span class="n">36</span>Terror in Resonance</div>
+      <div class="anime-item"><span class="n">37</span>Alya Hides Feelings in Russian</div>
+      <div class="anime-item"><span class="n">38</span>A Couple of Cuckoos</div>
+      <div class="anime-item"><span class="n">39</span>Redo of Healer</div>
+      <div class="anime-item"><span class="n">40</span>Undefeated Bahamut Chronicle</div>
+      <div class="anime-item"><span class="n">41</span>Code Geass</div>
+      <div class="anime-item"><span class="n">42</span>Rent-a-Girlfriend</div>
+      <div class="anime-item"><span class="n">43</span>2nd Cutest Girl in My Class</div>
+      <div class="anime-item"><span class="n">44</span>Wistoria: Wand and Sword</div>
+      <div class="anime-item"><span class="n">45</span>Maid Sama!</div>
+      <div class="anime-item"><span class="n">46</span>Prison School</div>
+    </div>
+
+    <div class="sub-label" style="margin-top:20px;">Manhua</div>
+    <div class="media-list">
+      <span class="media-pill">Darling in the FranXX</span>
+      <span class="media-pill">Tokyo Ghoul</span>
+      <span class="media-pill">Chainsaw Man</span>
+      <span class="media-pill">Angel Next Door</span>
+      <span class="media-pill">Vermeil in Gold</span>
+    </div>
+
+    <div class="sub-label" style="margin-top:16px;">Films</div>
+    <div class="media-list">
+      <span class="media-pill">Bridge to Terabithia</span>
+      <span class="media-pill">I'm a Robot</span>
+      <span class="media-pill">How to Train Your Dragon</span>
+      <span class="media-pill">Transformers One</span>
+      <span class="media-pill">Bumblebee</span>
+      <span class="media-pill">Rise of the Beasts</span>
+      <span class="media-pill">Transformers</span>
+      <span class="media-pill">Revenge of the Fallen</span>
+      <span class="media-pill">Dark of the Moon</span>
+      <span class="media-pill">Age of Extinction</span>
+      <span class="media-pill">The Last Knight</span>
+    </div>
+
+    <div class="sub-label" style="margin-top:16px;">Novels & VNs</div>
+    <div class="media-list">
+      <span class="media-pill">Альтушка для скуфа</span>
+      <span class="media-pill">Doki Doki Literature Club</span>
+      <span class="media-pill">Tiny Bunny</span>
+      <span class="media-pill">MiSide</span>
+      <span class="media-pill">FD+</span>
+    </div>
+
+    <p class="doza-note" style="margin-top:16px;">// DOZA.. — I'm too lazy to write everything</p>
+  </div>
+
+  <!-- PHOTO -->
+  <div class="card reveal" style="text-align:center;">
+    <img src="bio/IMG_20260626_194905_548.jpg" alt="Photo" class="profile-photo">
+  </div>
+
+  <!-- PLAY TOGETHER -->
+  <div class="card reveal">
+    <div class="section-label">let's play together</div>
+    <p style="font-size:11px;color:#444;margin-bottom:16px;font-family:var(--mono);">// click any nickname or ID to copy</p>
+    <ul class="play-list">
+      <li class="play-row">
+        <span class="play-game">DDraceNetwork</span>
+        <span class="copyable" data-copy="HAISECK">HAISECK</span>
+      </li>
+      <li class="play-row">
+        <span class="play-game">Roblox ID</span>
+        <span class="copyable" data-copy="floki_255">floki_255</span>
+      </li>
+      <li class="play-row">
+        <span class="play-game">Minecraft</span>
+        <span class="copyable" data-copy="HAISECK">HAISECK</span>
+      </li>
+      <li class="play-row">
+        <span class="play-game">Steam ID</span>
+        <span class="copyable" data-copy="1702795083">1702795083</span>
+      </li>
+      <li class="play-row">
+        <span class="play-game">Factorio</span>
+        <span class="copyable" data-copy="HAISECK">HAISECK</span>
+      </li>
+      <li class="play-row">
+        <span class="play-game">Forza Horizon 4</span>
+        <span class="copyable" data-copy="floki255#4392">floki255#4392</span>
+      </li>
+    </ul>
+    <div class="play-cta">DM ME WHO YOU ARE AND PLAY WITH ME!!</div>
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">copied!</div>
+
+<script>
+  // Copy to clipboard
+  document.querySelectorAll('.copyable').forEach(el => {
+    el.addEventListener('click', () => {
+      const text = el.dataset.copy || el.textContent;
+      navigator.clipboard.writeText(text).then(() => showToast(text));
+    });
+  });
+
+  function showToast(text) {
+    const t = document.getElementById('toast');
+    t.textContent = `"${text}" copied!`;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2000);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
